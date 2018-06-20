@@ -11,10 +11,6 @@
 
 #include <stdbool.h>
 #include "stm32f4xx.h"
-#include "systemcommon.h"
-#include "main.h"
-#include "uart.h"
-#include "sys.h"
 
 #define LED1_ON  GPIOD->BSRRL = GPIO_Pin_12
 #define LED1_OFF GPIOD->BSRRH = GPIO_Pin_12
@@ -33,9 +29,9 @@
 *******************************************************************************/
 int main(void)
 {
-    char c=0;
+    //char c=0;
     
-    Configuration_Init();
+    //Configuration_Init();
     LED1_ON;LED2_ON;
     //IWDG_Configuration();
     while(1)
@@ -44,20 +40,20 @@ int main(void)
         //ADC_Process();
         //USART_Process();
         //Other_Process();
-        if (true==Flag.flag)
-        {
-            Flag.flag = false;
-            if (c==0)
-            {
-                c =1;
-                LED1_OFF;LED2_ON;
-            }
-            else
-            {
-                c = 0;
-                LED1_ON;LED2_OFF;
-            }
-        }
+//        if (true==Flag.flag)
+//        {
+//            Flag.flag = false;
+//            if (c==0)
+//            {
+//                c =1;
+//                LED1_OFF;LED2_ON;
+//            }
+//            else
+//            {
+//                c = 0;
+//                LED1_ON;LED2_OFF;
+//            }
+//        }
         //Delay_10ms(100);
         
         /* Î¹¹· */
