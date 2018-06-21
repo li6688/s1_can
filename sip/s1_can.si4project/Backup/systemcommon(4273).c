@@ -24,8 +24,8 @@
 *******************************************************************************/
 static void RCC_Configuration(void)
 {
-    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, ENABLE);
+  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
+  RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, ENABLE);
 }
 
 /*******************************************************************************

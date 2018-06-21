@@ -313,6 +313,8 @@
           <state>$PROJ_DIR$\Libraries\CMSIS\Device\STM32F4xx\Include</state>
           <state>$PROJ_DIR$\Libraries\STM32F4xx_StdPeriph_Driver\inc</state>
           <state>$PROJ_DIR$\Libraries\CMSIS\Include</state>
+          <state>$PROJ_DIR$\user</state>
+          <state>$PROJ_DIR$\module\systick</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -727,7 +729,7 @@
         </option>
         <option>
           <name>IlinkIcfFile</name>
-          <state>lnk0t.icf</state>
+          <state>$TOOLKIT_DIR$\config\linker\ST\stm32f407xG.icf</state>
         </option>
         <option>
           <name>IlinkIcfFileSlave</name>
@@ -787,7 +789,7 @@
         </option>
         <option>
           <name>IlinkProgramEntryLabel</name>
-          <state></state>
+          <state>__iar_program_start</state>
         </option>
         <option>
           <name>DoFill</name>
@@ -1940,7 +1942,7 @@
       <name>$PROJ_DIR$\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.c</name>
     </file>
     <file>
-      <name>$PROJ_DIR$\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.c</name>
+      <name>$PROJ_DIR$\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.c</name>
@@ -1950,9 +1952,27 @@
     </file>
   </group>
   <group>
+    <name>module</name>
+    <group>
+      <name>systick</name>
+      <file>
+        <name>$PROJ_DIR$\module\systick\systick.c</name>
+      </file>
+    </group>
+  </group>
+  <group>
     <name>User</name>
     <file>
       <name>$PROJ_DIR$\user\main.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\user\sys.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\user\systemcommon.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\user\timer.c</name>
     </file>
   </group>
 </project>

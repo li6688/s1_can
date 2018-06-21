@@ -2332,7 +2332,7 @@
       <name>$PROJ_DIR$\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.c</name>
     </file>
     <file>
-      <name>$PROJ_DIR$\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.c</name>
+      <name>$PROJ_DIR$\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.c</name>
@@ -2342,9 +2342,27 @@
     </file>
   </group>
   <group>
+    <name>module</name>
+    <group>
+      <name>systick</name>
+      <file>
+        <name>$PROJ_DIR$\module\systick\systick.c</name>
+      </file>
+    </group>
+  </group>
+  <group>
     <name>User</name>
     <file>
       <name>$PROJ_DIR$\user\main.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\user\sys.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\user\systemcommon.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\user\timer.c</name>
     </file>
   </group>
 </project>
