@@ -58,7 +58,7 @@ int main(void)
         }
         
         /* Î¹¹· */
-        //IWDG_ReloadCounter();
+        IWDG_ReloadCounter();
     }
 
 }
