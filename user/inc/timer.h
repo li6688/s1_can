@@ -1,20 +1,18 @@
 /**
   ******************************************************************************
-  * @file    timer.c
-  * @author  LL
+  * @file    timer.h
+  * @author  ADT LL
   * @version V0.0.0
-  * @date    2016-03-21
+  * @date    2014-04-23
   * @brief   
   ******************************************************************************
   ******************************************************************************
 ***/
+
 #ifndef __TIMER_H__
 #define __TIMER_H__
 
-#define TIMER_SAPMLE_EN T0CON0bits.T0EN=1 //使能定时器
-#define TIMER_SAPMLE_DI T0CON0bits.T0EN=0 //禁止定时器
-
-void Timer_Init(void);
+extern void TIM_Configuration(void);
 
 #endif /* __TIMER_H__ */
 

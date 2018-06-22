@@ -1,30 +1,33 @@
 /**
   ******************************************************************************
-  * @file    adc.h
+  * @file    i2c.h
   * @author  LL
   * @version V0.0.0
-  * @date    2014-04-23
-  * @brief   
+  * @date    2014-10-20
+  * @brief   Í·ÎÄ¼þ
   ******************************************************************************
   ******************************************************************************
 ***/
 
-#ifndef __ADC_H__
-#define __ADC_H__
+#ifndef __I2C_H__
+#define __I2C_H__
+
 
 #ifdef __cplusplus
-  extern "C" {
+ extern "C" {
+#endif
+
+#define I2C_OK       0
+#define I2C_TIMEOUT  1
+
+
+extern void I2C1_Init(void);
+
+#ifdef __cplusplus
+}
 #endif
 
 
-extern uint16_t ADC_ConverStable(uint8_t channel);
-extern void ADC_Init(void);
-extern void ADC_Process(void);
+#endif /* __I2C_H__ */
 
-#ifdef __cplusplus
-  }
-#endif
-
-#endif /* __ADC_H__ */
-
-/* ************ ****** ************ THE FILE END  ************ ****** ************ */
+/* ************ ****** ************ THE FILE END ************ ****** ************ */

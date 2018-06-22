@@ -9,7 +9,7 @@
   ******************************************************************************
 ***/
 #include <stdint.h>
-#include "stm32f4xx.h"
+#include "stm32f10x.h"
 
 volatile uint32_t SysTickCountValue; //系统定计数器计数值
 

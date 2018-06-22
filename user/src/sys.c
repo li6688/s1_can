@@ -10,13 +10,12 @@
 ***/
 
 #include <stdint.h>
+#include <stdbool.h>
 #include "sys.h"
 
 Flag_StructType Flag;  //全局标志变量
 GlobalVariable_StructType GlobalVar;
-#if SYSTICKCOUNTVALUE_EN //有些编译器会对没有使用的全局变量警告，不使用的时候禁止，可以去掉警告
-unsigned long int SysTickCountValue;
-#endif
+
 #if HEXTOASCIITAB_EN
 uint8_t HexToAsciiTab[16] = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
 #endif
@@ -123,43 +122,4 @@ void NumberToAsciiHEX(uint8_t *buf, uint32_t number, uint8_t len)
 	buf[i+2]= '\0';
 }
 #endif /* HEXTOASCIITAB_EN */
-#if SYSTICKCOUNTVALUE_EN        
-/*******************************************************************************
-* Function Name  : delay_10ms
-* Description    : 延时一段时间.延时时间=value*10毫秒。
-* Input          : value: 延时的10ms 数.
-* Output         : None
-* Return         : None
-*******************************************************************************/
-void Delay_10ms(uint32_t value)
-{
-  uint32_t Dtime;
-  Dtime = SysTickCountValue;
-  while (SysTickCountValue-Dtime < value);
-}
-
-/*******************************************************************************
-* Function Name  : Read_UserTimer
-* Description    : 读用户时间，查看用户过了多长时间，用于用户延时.
-* Input          : time: 用户时间值.
-* Output         : None
-* Return         : 用户时间与系统时间的差值
-*******************************************************************************/
-uint32_t Read_UserTimer(uint32_t time)
-{
-  return (SysTickCountValue-time);
-}
-
-/*******************************************************************************
-* Function Name  : Reset_UserTimer
-* Description    : 设置用户时间，将当前的用户时间复位到系统时间.
-* Input          : time: 用户时间值.
-* Output         : None
-* Return         : None
-*******************************************************************************/
-void Reset_UserTimer(uint32_t *time)
-{
-  *time = SysTickCountValue;
-}
-#endif /* SYSTICKCOUNTVALUE_EN */
 /* ************ ****** ************ THE FILE END  ************ ****** ************ */

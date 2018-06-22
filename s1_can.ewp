@@ -315,6 +315,7 @@
           <state>$PROJ_DIR$\Libraries\CMSIS\Include</state>
           <state>$PROJ_DIR$\user</state>
           <state>$PROJ_DIR$\module\systick</state>
+          <state>$PROJ_DIR$\user\inc</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -1966,13 +1967,13 @@
       <name>$PROJ_DIR$\user\main.c</name>
     </file>
     <file>
-      <name>$PROJ_DIR$\user\sys.c</name>
+      <name>$PROJ_DIR$\user\src\sys.c</name>
     </file>
     <file>
-      <name>$PROJ_DIR$\user\systemcommon.c</name>
+      <name>$PROJ_DIR$\user\src\systemcommon.c</name>
     </file>
     <file>
-      <name>$PROJ_DIR$\user\timer.c</name>
+      <name>$PROJ_DIR$\user\src\timer.c</name>
     </file>
   </group>
 </project>

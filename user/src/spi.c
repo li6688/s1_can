@@ -1,107 +1,114 @@
 /**
-******************************************************************************
-* @file    spi.c
-* @author  LL
-* @version V0.0.0
-* @date    2017-07-28
-* @brief   
-******************************************************************************
-******************************************************************************
+  ******************************************************************************
+  * @file    spi.c
+  * @author  LL
+  * @version V0.0.0
+  * @date    2014-04-23
+  * @brief   SPI操作函数
+  ******************************************************************************
+  ******************************************************************************
 ***/
-#define __SPI_C__
 
-#include "config.h"
+#include <stdint.h>
+#include "stm32f10x.h"
+#include "main.h"
+#include "spi.h"
 
-//片选 RC6
-#define CS_TRI TRISCbits.TRISC6
-#define CS_PORT LATCbits.LATC6
-#define CS_ANS  ANSELCbits.ANSC6
-#define CS_OUT  {CS_ANS = 0; CS_TRI = 0; NOP();}
-#define CS_SET  {CS_PORT = 1;}
-#define CS_CLR  {CS_PORT = 0;}
-
-/*******************************************************************************
-* Function Name  : SPI_ReadWriteByte 
-* Description    : spi读写函数
-* Input          : None
-* Output         : None
-* Return         : None
-* Date           : 2017-07-28
-* Author         : LL
-*******************************************************************************/
-uint8_t SPI_ReadWriteByte(uint8_t data)
-{ 
-    PIR1bits.SSP1IF=0;
-    // Wait for free buffer
-    while(SSP1STATbits.BF);
-    SSP1BUF = data;
-    // Wait for data byte
-    while(!SSP1STATbits.BF);
-    return SSP1BUF;
-}
-
-/*******************************************************************************
-* Function Name  : SPI_DeInit 
-* Description    : spi关闭
-* Input          : None
-* Output         : None
-* Return         : None
-* Date           : 2017-07-28
-* Author         : LL
-*******************************************************************************/
-void SPI_DeInit(void)
+void SPI1_Init(void)
 {
-	SSP1CON1bits.SSPEN = 0;/* Disable SPI */
+    SPI_InitTypeDef  SPI_InitStructure;
+
+    /*!< SPI configuration */
+    SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
+    SPI_InitStructure.SPI_Mode = SPI_Mode_Master;
+    SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b;
+    SPI_InitStructure.SPI_CPOL = SPI_CPOL_High;
+    SPI_InitStructure.SPI_CPHA = SPI_CPHA_2Edge;
+    SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;
+    SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;
+    SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;
+    SPI_InitStructure.SPI_CRCPolynomial = 7;
+    SPI_Init(SPI1, &SPI_InitStructure);
+
+    /*!< Enable the SPI  */
+    SPI_Cmd(SPI1, ENABLE);
+    SPI1_ReadWriteByte(0xFF);
 }
 
-/*******************************************************************************
-* Function Name  : SPI_Init 
-* Description    : spi初始化
-* Input          : None
-* Output         : None
-* Return         : None
-* Date           : 2017-07-28
-* Author         : LL
-*******************************************************************************/
-void SPI_Init(void)
+uint8_t SPI1_ReadWriteByte(uint8_t TxData)
+{		
+	uint8_t retry;
+    
+    retry = 0;
+    /*!< Loop while DR register in not emplty */
+    while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET)
+    {
+        retry++;
+		if(retry > 200) return 0;
+    }
+
+    /*!< Send byte through the SPI peripheral */
+    SPI_I2S_SendData(SPI1, TxData);
+
+    retry = 0;
+    /*!< Wait to receive a byte */
+    while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_RXNE) == RESET)
+    {
+        retry++;
+		if(retry > 200) return 0;
+    }
+
+    /*!< Return the byte read from the SPI bus */
+    return SPI_I2S_ReceiveData(SPI1);	    
+}
+
+void SPI2_Init(void)
 {
-	// Unlock Registers
-    //GIE = 0;//禁止中断
-    PPSLOCK = 0x55; // 第一个解锁代码
-    PPSLOCK = 0xAA; // 第二个解锁代码
-    PPSLOCKbits.PPSLOCKED = 0x00; // 解锁 PPS
-    
-    //配置端口映射，SPI
-    RB6PPSbits.RB6PPS = 0x18;//输出为RB6
-    RB4PPSbits.RB4PPS = 0x19;//输出为RB4
-    SSP1DATPPSbits.SSP1DATPPS = 0x12;//输入RC2
-    
-    
-    // Lock Registers
-    PPSLOCK = 0x55; // 第一个锁定代码
-    PPSLOCK = 0xAA; // 第二个锁定代码
-    PPSLOCKbits.PPSLOCKED = 0x01; // 锁定 PPS
-    
-    //GIE = 1; // 允许中断
-    
-    //关闭引脚的模拟功能
-    ANSELBbits.ANSB6 = 0; //SCK
-    ANSELBbits.ANSB4 = 0; //OUT
-    ANSELCbits.ANSC2 = 0; //IN
-    //配置引脚的方向
-    TRISBbits.TRISB6 = 0; //SCK
-    TRISBbits.TRISB4 = 0; //OUT
-    TRISCbits.TRISC2 = 1; //IN 
+    SPI_InitTypeDef  SPI_InitStructure;
 
-	CS_OUT;
-	CS_SET;
-	
-    SSP1STAT=0;
-    SSP1CON1=0;
-	SSP1STATbits.CKE=0;//0时钟状态从空闲转换到有效时发送 1时钟状态从有效转换到空闲时发送
-    SSP1STATbits.SMP=0;//0在数据输出时间的中间采样输入数据 1在数据输出时间的末尾采样输入数据
-    SSP1CON1bits.SSPM = 0;//0 SPI主模式,时钟Fosc/4 1 SPI主模式,时钟Fosc/16
-    SSP1CON1bits.CKP=1;//0时钟空闲状态为低电平 1时钟空闲状态为高电平
-    SSP1CON1bits.SSPEN=1;//使能模块并将SCKx、SDOx、SDIx 和SSx 配置为串行端口引脚
+    /*!< SPI configuration */
+    SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
+    SPI_InitStructure.SPI_Mode = SPI_Mode_Master;
+    SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b;
+    SPI_InitStructure.SPI_CPOL = SPI_CPOL_High;
+    SPI_InitStructure.SPI_CPHA = SPI_CPHA_2Edge;
+    SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;
+    SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;
+    SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;
+    SPI_InitStructure.SPI_CRCPolynomial = 7;
+    SPI_Init(SPI2, &SPI_InitStructure);
+
+    /*!< Enable the SPI  */
+    SPI_Cmd(SPI2, ENABLE);
+    SPI2_ReadWriteByte(0xFF);
 }
-/* ************ ****** ************ THE FILE END  ************ ****** ************ */				
+
+uint8_t SPI2_ReadWriteByte(uint8_t TxData)
+{		
+	uint8_t retry;	
+
+    retry = 0;
+    /*!< Loop while DR register in not emplty */
+    while (SPI_I2S_GetFlagStatus(SPI2, SPI_I2S_FLAG_TXE) == RESET)
+    {
+        retry++;
+		if(retry > 200) return 0;
+    }
+
+    /*!< Send byte through the SPI peripheral */
+    SPI_I2S_SendData(SPI2, TxData);
+
+    retry = 0;
+    /*!< Wait to receive a byte */
+    while (SPI_I2S_GetFlagStatus(SPI2, SPI_I2S_FLAG_RXNE) == RESET)
+    {
+        retry++;
+		if(retry > 200) return 0;
+    }
+
+    /*!< Return the byte read from the SPI bus */
+    return SPI_I2S_ReceiveData(SPI2);	    
+}
+
+
+/* ************ ****** ************ THE FILE END ************ ****** ************ */

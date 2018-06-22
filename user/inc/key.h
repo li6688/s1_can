@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
-  * @file    timer.h
-  * @author  ADT LL
+  * @file    key.h
+  * @author  LL
   * @version V0.0.0
   * @date    2014-04-23
   * @brief   
@@ -9,11 +9,22 @@
   ******************************************************************************
 ***/
 
-#ifndef __TIMER_H__
-#define __TIMER_H__
+#ifndef __KEY_H__
+#define __KEY_H__
 
-extern void TIM_Configuration(void);
 
-#endif /* __TIMER_H__ */
+#ifdef __cplusplus
+ extern "C" {
+#endif
 
-/* ************ ****** ************ THE FILE END  ************ ****** ************ */
+
+extern void Key_Read(void);
+
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif  /* __KEY_H__ */
+
+/* ************ ****** ************ THE FILE END ************ ****** ************ */

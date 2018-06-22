@@ -23,7 +23,7 @@
 extern void UART_PutChar(uint8_t data);
 extern void UART_PrintfString(uint8_t *buf);
 extern void UART_PrintfNormal(uint8_t *buf, uint16_t len);
-extern void UART_Init(void);
+extern void USART_Configuration(void);
 extern void USART_Process(void);
 
 

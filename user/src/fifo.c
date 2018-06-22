@@ -31,6 +31,15 @@
 ***/
 #include "fifo.h"
 
+DATATYPE Tx_Buffer[TX_SIZE];
+static FiFo_StructType Tx;
+FiFo_StructType *pTx = &Tx;
+
+DATATYPE Rx_Buffer[RX_SIZE];
+static FiFo_StructType Rx;
+FiFo_StructType *pRx = &Rx;
+
+/* 得到缓冲区数据个数 */
 DATATYPESIZE FIFO_GetCount(FiFo_StructType *FiFo)
 {
 	DATATYPESIZE temp;

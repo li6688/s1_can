@@ -29,27 +29,18 @@
 #define SYSTIME_1M    60*SYSTIME_1S
 #define SYSTIME_2M    2*SYSTIME_1M
 
-#define SYSTICKCOUNTVALUE_EN 0 //有些编译器会对没有使用的全局变量警告，不使用的时候禁止，可以去掉警告
 #define HEXTOASCIITAB_EN 1 //有些编译器会对没有使用的全局变量警告，不使用的时候禁止，可以去掉警告
 
-
-    #define DELAY_NOP asm volatile ("REPEAT, #1"); Nop();
-    #define FP 8000000
-
-typedef enum{FALSE=0, TRUE = !FALSE}Bool;
-typedef Bool BOOL;
 typedef enum{OFF=0, ON = !OFF}OnOffSatus;
 typedef struct
 {
-	BOOL cursta;//当前状态
-	BOOL presta;//前一状态
+	bool cursta;//当前状态
+	bool presta;//前一状态
 }Status_StructType;
 typedef struct
 {
-	BOOL flag;
-	BOOL Connect;//连接标志
-    BOOL Gray_Scan;//读格雷码
-    BOOL ReciveOK;//接收到一帧数据 
+	bool flag;
+	bool key_scan;//按键扫描
 	Status_StructType Start;
   
 }Flag_StructType;
@@ -57,6 +48,7 @@ typedef struct
 
 typedef struct
 {
+    uint32_t  ResetSource;//复位源
 	uint8_t  DeviceID;//设备地址
 	uint16_t GrayCode;//格雷码
 	uint8_t  FMVersion[30];
@@ -67,19 +59,12 @@ typedef struct
 #if HEXTOASCIITAB_EN
 extern unsigned char HexToAsciiTab[];
 #endif
-#if SYSTICKCOUNTVALUE_EN
-extern unsigned long int SysTickCountValue;
-#endif
 
 extern  Flag_StructType Flag;
 extern  GlobalVariable_StructType GlobalVar;
 
 extern void NumberToAscii(uint8_t *buf, uint32_t number, uint8_t len);
 extern void NumberToAsciiHEX(uint8_t *buf, uint32_t number, uint8_t len);
-extern uint32_t Read_UserTimer(uint32_t time);
-extern void Reset_UserTimer(uint32_t *time);
-extern void Delay_10ms(uint32_t value);
-
 
 #ifdef __cplusplus
   }

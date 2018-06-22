@@ -15,16 +15,25 @@
 #define _DI()
 #define _EI()
 
+#define TX_SIZE 128
+#define RX_SIZE 56
+
 #define  DATATYPE unsigned char
 #define  DATATYPESIZE unsigned int
 
 typedef struct
 {
-	DATATYPE *pBuf;
-	DATATYPE *Tail;
-	DATATYPE *Head;
-  DATATYPESIZE len;
+    DATATYPE *pBuf;
+    DATATYPE *Tail;
+    DATATYPE *Head;
+    DATATYPESIZE len;
 }FiFo_StructType;
+
+extern DATATYPE Tx_Buffer[];
+extern FiFo_StructType *pTx;
+
+extern DATATYPE Rx_Buffer[];
+extern FiFo_StructType *pRx;
 
 extern DATATYPESIZE FIFO_GetCount(FiFo_StructType *FiFo);
 extern unsigned char FIFO_PutOne(FiFo_StructType *FiFo, DATATYPE Data);

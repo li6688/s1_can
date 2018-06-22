@@ -103,44 +103,30 @@ static void UART_PrintfDateTime(void)
 *******************************************************************************/
 static void UART2_Init(void)
 {  
-    //配置端口映射，串口
-    RXPPSbits.RXPPS = 0x0D;//输入RB5
-    RB6PPSbits.RB6PPS = 0x14;//输出为RB6
+    USART_InitTypeDef USART_InitStructure;
   
-	//串口
-    //关闭引脚的模拟功能
-    ANSELBbits.ANSB5 = 0;
-    ANSELBbits.ANSB6 = 0;
-    //配置引脚的方向
-    TRISBbits.TRISB5 = 1;
-    TRISBbits.TRISB6 = 0;
+    /* USARTx configuration ------------------------------------------------------*/
+    /* USARTx configured as follows:
+        - BaudRate = 9600 baud  
+        - Word Length = 8 Bits
+        - Two Stop Bit
+        - Odd parity
+        - Hardware flow control disabled (RTS and CTS signals)
+        - Receive and transmit enabled
+    */
+    USART_InitStructure.USART_BaudRate = 9600;
+    USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+    USART_InitStructure.USART_StopBits = USART_StopBits_2;
+    USART_InitStructure.USART_Parity = USART_Parity_Odd;
+    USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+    USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
 
-	RC1STAbits.SPEN = 0;//关闭串口
+    /* USART configuration */
+    USART_Init(USART2, USART_InitStructure);
+    USART_ITConfig(USART2, USART_IT_RXNE, ENABLE);//使能接受中断
 
-    SP1BRGH = (UART_BRGVAL>>8) & 0xFF; // Baud Rate setting
-    SP1BRGL = UART_BRGVAL & 0xFF;
-    
-    TX1STAbits.TX9 = 0; //8-Data bits
-    TX1STAbits.SYNC = 0;//异步模式
-    TX1STAbits.BRGH = 1;//低速,和BRG16一起，决定波特率计算公式
-    TX1STAbits.TXEN = 1;//使能发送
-    
-    RC1STAbits.RX9 = 0;//接收8bit
-    RC1STAbits.ADDEN = 0;//禁止地址监测
-    RC1STAbits.CREN = 1;//使能连续接收
-    
-    BAUD1CONbits.SCKP = 0;//发送脚空闲时为高电平
-    BAUD1CONbits.BRG16 = 1;//16位波特率发生器，和BRGH一起，决定波特率计算公式
-    BAUD1CONbits.ABDEN = 0;//禁止自动波特率监测
-   
-    RC1STAbits.SPEN = 1;//使能串口
-    
-    PIR1bits.RCIF = 0;//清楚标志
-    PIE1bits.RCIE = 1;//shi能中断
-    
-    //485 方向引脚
-    DE485_OUT;
-    DE485_CLR;
+    /* Enable USART */
+    USART_Cmd(USART2, ENABLE);
     
 }
 
@@ -196,7 +182,7 @@ void UART_PrintfNormal(uint8_t *buf, uint16_t len)
 }
 
 /*******************************************************************************
-* Function Name  : UART_Init 
+* Function Name  : USART_Configuration 
 * Description    : 串口初始化,串口对外调用接口
 * Input          : None
 * Output         : None
@@ -204,10 +190,9 @@ void UART_PrintfNormal(uint8_t *buf, uint16_t len)
 * Date           : 2016-03-16
 * Author         : LL
 *******************************************************************************/
-void UART_Init(void)
+void USART_Configuration(void)
 {
 	UART2_Init();
-    Modbus_Init();
    
 	DEBUG_PRINTFMASSAGES("UART OK");
     DEBUG_PRINTFMASSAGES(__DATE__);
