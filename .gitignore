@@ -1,2 +1,5 @@
 ##ignore this file##
 /Debug/
+/sip/
+/settings/
+.dep
