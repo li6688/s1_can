@@ -45,7 +45,7 @@
         </option>
         <option>
           <name>MemFile</name>
-          <state>$TOOLKIT_DIR$\CONFIG\debugger\ST\STM32F407ZG.ddf</state>
+          <state>$TOOLKIT_DIR$\CONFIG\debugger\ST\STM32F407VG.ddf</state>
         </option>
         <option>
           <name>RunToEnable</name>
@@ -1163,7 +1163,7 @@
         </option>
         <option>
           <name>CCSTLinkInterfaceRadio</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>CCSTLinkInterfaceCmdLine</name>

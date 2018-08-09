@@ -1,0 +1,21 @@
+---- USART_InitStructure Matches (2 in 1 files) ----
+UART2_Init in uart.c (user\src) : 
+{  
+    USART_InitTypeDef USART_InitStructure;
+  
+    /* USARTx configuration ------------------------------------------------------*/
+    /* USARTx configured as follows:
+UART2_Init in uart.c (user\src) : 
+    */
+    USART_InitStructure.USART_BaudRate = 9600;
+    USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+    USART_InitStructure.USART_StopBits = USART_StopBits_2;
+    USART_InitStructure.USART_Parity = USART_Parity_Odd;
+    USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+    USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+
+    /* USART configuration */
+    USART_Init(USART2, USART_InitStructure);
+    USART_ITConfig(USART2, USART_IT_RXNE, ENABLE);//使能接收中断
+    USART_Cmd(USART2, ENABLE);
+    

@@ -17,15 +17,15 @@
  extern "C" {
 #endif
 
-#define CS1_PORT  GPIOB
-#define CS1_BIT   GPIO_Pin_12
-#define CS1_SET   CS1_PORT->BSRR |= CS1_BIT;//高电平
-#define CS1_CLR   CS1_PORT->BRR  |= CS1_BIT;//低电平
+#define CS1_PORT  GPIOE
+#define CS1_BIT   GPIO_Pin_3
+#define CS1_SET   CS1_PORT->BSRRL |= CS1_BIT;//高电平
+#define CS1_CLR   CS1_PORT->BSRRH |= CS1_BIT;//低电平
 
 #define CS2_PORT  GPIOA
 #define CS2_BIT   GPIO_Pin_10
-#define CS2_SET   CS2_PORT->BSRR |= CS2_BIT;//高电平
-#define CS2_CLR   CS2_PORT->BRR  |= CS2_BIT;//低电平
+#define CS2_SET   CS2_PORT->BSRRL |= CS2_BIT;//高电平
+#define CS2_CLR   CS2_PORT->BSRRH |= CS2_BIT;//低电平
 
 
 extern void SPI1_Init(void);

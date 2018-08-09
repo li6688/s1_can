@@ -49,6 +49,14 @@ void TIM2_IRQHandler(void)
 {
 	TIM2->SR &= (u16)~TIM_SR_UIF;	  	//清中断标记
 
+    Delay.led_time++;
+      
+    if (Delay.led_time > T_1S)
+    {
+        Flag.flag = true;
+        Delay.led_time = 0;
+    }
+
   
 }
 /*******************************************************************************
@@ -58,44 +66,18 @@ void TIM2_IRQHandler(void)
 * Output         : None
 * Return         : None
 *******************************************************************************/
-static TIM2_Configuration(void)
+static void TIM2_Configuration(void)
 {
-  RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
+    TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
 
-  TIM2->ARR = 1; 		 			//初值
-	TIM2->PSC = 71; 	 			     //分频值
+    TIM_TimeBaseStructure.TIM_Period = 9999;
+    TIM_TimeBaseStructure.TIM_Prescaler = 167;
+    TIM_TimeBaseStructure.TIM_ClockDivision = 0;
+    TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
 
-  //TIM2->CR2 = (TIM_CR2_MMS_0|TIM_CR2_MMS_1); 
-
-  TIM2->CCMR1 = (TIM_CCMR1_OC2M_1|TIM_CCMR1_OC2M_2);
-  TIM2->CCR2 = 1;
-  TIM2->CCER = TIM_CCER_CC2E;
-  TIM2->CCMR1 |= TIM_CCMR1_OC2PE;
-
-	TIM2->CR1 |= TIM_CR1_CEN; 
-	TIM2->EGR |= TIM_EGR_UG;
-	while((TIM2->SR & TIM_SR_UIF) == 0);
-	TIM2->SR &= (u16)~TIM_SR_UIF;
-	//TIM2->DIER |= TIM_DIER_UIE;
-  
-  //NVIC_Init(1,1, TIM2_IRQn);   
-}
-
-void TIM2_ReConfiguration(uint16_t arr, uint16_t ccr)
-{
-  TIM2->CR1 &= ~TIM_CR1_CEN;
-  TIM2->ARR = arr; 		 			//初值
-	TIM2->PSC = 71; 	 			     //分频值
-
-  TIM2->CCMR1 = (TIM_CCMR1_OC2M_1|TIM_CCMR1_OC2M_2);
-  TIM2->CCR2 = ccr;
-  TIM2->CCER = TIM_CCER_CC2E;
-  TIM2->CCMR1 |= TIM_CCMR1_OC2PE;
-
-	TIM2->CR1 |= TIM_CR1_CEN; 
-	TIM2->EGR |= TIM_EGR_UG;
-	while((TIM2->SR & TIM_SR_UIF) == 0);
-	TIM2->SR &= (u16)~TIM_SR_UIF; 
+    TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
+    TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
+    TIM_Cmd(TIM2, ENABLE);
 }
 #endif /*TIM2_ENABLE*/
 
@@ -298,6 +280,7 @@ void TIM7_IRQHandler(void)
 {
   TIM7->SR &= (u16)~TIM_SR_UIF;	  	//清中断标记
 
+  Flag.key_scan = true;
   Delay.led_time++;
   
   if (Delay.led_time > T_1S)
@@ -323,6 +306,7 @@ static void TIM7_Configuration(void)
     TIM_TimeBaseStructure.TIM_Prescaler = 83;
 
     TIM_TimeBaseInit(TIM7, &TIM_TimeBaseStructure);
+    TIM_ARRPreloadConfig(TIM7, ENABLE);
     TIM_ITConfig(TIM7, TIM_IT_Update, ENABLE);//使能中断
     TIM_Cmd(TIM7, ENABLE);
 }

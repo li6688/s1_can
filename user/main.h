@@ -22,7 +22,8 @@
 //#define TIM5_ENABLE
 //#define TIM6_ENABLE
 #define TIM7_ENABLE
-#define USART1_ENABLE
+//#define USART1_ENABLE
+#define USART2_ENABLE
 //#define USART3_ENABLE
 #define DAC_ENABLE
 

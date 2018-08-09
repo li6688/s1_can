@@ -11,8 +11,12 @@
 #define __UART_PRINTF_C__
 
 extern unsigned char UART_PutChar( unsigned char c);
+
+#include <stdint.h>
+#include <stdbool.h>
 #include "uart_printf.h"
-#include "debug_printf_sys.h"
+//#include "debug_printf_sys.h"
+#include "sys.h"
 
 #if UART_PRINTF_EN
 

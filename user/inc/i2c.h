@@ -20,8 +20,8 @@
 #define I2C_OK       0
 #define I2C_TIMEOUT  1
 
-
-extern void I2C1_Init(void);
+extern uint8_t I2C1_Read(uint8_t *pBuffer, uint16_t ReadAddr, uint8_t NumByteToRead);
+extern void I2C1_Init(void); 
 
 #ifdef __cplusplus
 }

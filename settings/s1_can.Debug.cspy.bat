@@ -25,7 +25,7 @@ if not "%~1" == "" goto debugFile
 
 @echo on 
 
-"D:\Program Files (x86)\IAR Systems\Embedded Workbench 7.4\common\bin\cspybat" -f "E:\stu\stm32\gitstm32F4\settings\s1_can.Debug.general.xcl" --backend -f "E:\stu\stm32\gitstm32F4\settings\s1_can.Debug.driver.xcl" 
+"D:\Program Files (x86)\IAR Systems\Embedded Workbench 7.4\common\bin\cspybat" -f "D:\study\stm32\stm32f4\s1_can\settings\s1_can.Debug.general.xcl" --backend -f "D:\study\stm32\stm32f4\s1_can\settings\s1_can.Debug.driver.xcl" 
 
 @echo off 
 goto end 
@@ -34,7 +34,7 @@ goto end
 
 @echo on 
 
-"D:\Program Files (x86)\IAR Systems\Embedded Workbench 7.4\common\bin\cspybat" -f "E:\stu\stm32\gitstm32F4\settings\s1_can.Debug.general.xcl" "--debug_file=%~1" --backend -f "E:\stu\stm32\gitstm32F4\settings\s1_can.Debug.driver.xcl" 
+"D:\Program Files (x86)\IAR Systems\Embedded Workbench 7.4\common\bin\cspybat" -f "D:\study\stm32\stm32f4\s1_can\settings\s1_can.Debug.general.xcl" "--debug_file=%~1" --backend -f "D:\study\stm32\stm32f4\s1_can\settings\s1_can.Debug.driver.xcl" 
 
 @echo off 
 :end

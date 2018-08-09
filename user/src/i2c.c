@@ -10,15 +10,16 @@
 ***/
 
 #include <stdint.h>
-#include "stm32f10x.h"
+#include "stm32f4xx.h"
 #include "main.h"
 #include "i2c.h"
-#include "ds1682.h"
 
 #define WAITE_TIMEOUT 2000
 
 #define I2C_SPEED          300000
-#define I2C_SLAVE_ADDRESS7 0xD6
+#define I2C_SLAVE_ADDRESS7 0x33
+
+#define DEVICE_ADDR 0x94
 
 
 void I2C1_Init(void)
@@ -59,7 +60,7 @@ uint8_t I2C1_Write(uint8_t *pBuffer, uint16_t WriteAddr, uint8_t NumByteToWrite)
     }
 
     /*!< Send address for write */
-    I2C_Send7bitAddress(I2C1, DS1682_ADDR, I2C_Direction_Transmitter);
+    I2C_Send7bitAddress(I2C1, DEVICE_ADDR, I2C_Direction_Transmitter);
     /*!< Test on EV6 and clear it */
     retry = 0;
     while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED))
@@ -118,7 +119,7 @@ uint8_t I2C1_Read(uint8_t *pBuffer, uint16_t ReadAddr, uint8_t NumByteToRead)
     }
 
     /*!< Send address for write */
-    I2C_Send7bitAddress(I2C1, DS1682_ADDR, I2C_Direction_Transmitter);
+    I2C_Send7bitAddress(I2C1, DEVICE_ADDR, I2C_Direction_Transmitter);
     /*!< Test on EV6 and clear it */
     retry = 0;
     while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED))
@@ -148,7 +149,7 @@ uint8_t I2C1_Read(uint8_t *pBuffer, uint16_t ReadAddr, uint8_t NumByteToRead)
     } 
 
     /*!< Send address for read */
-    I2C_Send7bitAddress(I2C1, DS1682_ADDR, I2C_Direction_Receiver);  
+    I2C_Send7bitAddress(I2C1, DEVICE_ADDR, I2C_Direction_Receiver);  
       
     /* One Byte Master Reception procedure (POLLING) ---------------------------*/
     if (NumByteToRead == 1)
@@ -290,7 +291,7 @@ uint8_t I2C1_Read(uint8_t *pBuffer, uint16_t ReadAddr, uint8_t NumByteToRead)
         /*!< Re-Enable Acknowledgement to be ready for another reception */
         I2C_AcknowledgeConfig(I2C1, ENABLE); 
     }
-      
+    I2C_ClearFlag(I2C1, I2C_FLAG_AF);
     return I2C_OK;
 }
 

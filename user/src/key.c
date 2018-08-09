@@ -11,13 +11,10 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include "stm32f10x.h"
+#include "stm32f4xx.h"
 #include "main.h"
 #include "sys.h"
-#include "lcd12864.h"
-#include "ds1682.h"
-#include "ds1682-2.h"
-//#define KEY_TEST  //ÓÃÓÚ²âÊÔ°´¼ü
+#include "can.h"
 
 #define KEY_NULL     0x00    //¿Õ
 #define	KEY_S1       0x08    //KEY1
@@ -25,7 +22,7 @@
 #define	KEY_S3       0x02    //KEY3
 #define	KEY_S4       0x01    //KEY4
 
-#define KEY_ENTER   KEY_S1
+#define KEY_ENTER   KEY_S4
 #define	KEY_ENTERHOLD   0x80|KEY_ENTER
 
 enum
@@ -80,15 +77,10 @@ void Key_All_Serve(void)
 {
     switch(keys.closed)
     {
-        case KEY_S1:
-            DS1682_Write();
-            break;
-        case KEY_S2:
-            DS1682_Write2();
-            break;
-        case KEY_S3:
-            break;
-        case KEY_S4:
+        case KEY_ENTER:
+            Flag.key_has = true;
+            CAN1_Send();
+            //CAN2_Send();
             break;
         case KEY_ENTERHOLD:
             break;
@@ -108,7 +100,7 @@ void Key_Read(void)
     bool ref=false;
     if(false == Flag.key_scan) return;
 
-    temp = ~((GPIOA->IDR >> 0) | 0xFFF0);	 				
+    temp = ((GPIOA->IDR >> 0) & 0x0001);	 				
 
     switch(keys.step)
     {

@@ -97,12 +97,12 @@ unsigned char FIFO_GetOne(FiFo_StructType *FiFo, DATATYPE *pData)
 /* Dump some data of FIFO */
 void FIFO_Init(FiFo_StructType *FiFo, DATATYPESIZE Size, DATATYPE *Buf)
 {
-	_DI();
-		FiFo->pBuf = Buf;
-		FiFo->Head = FiFo->pBuf;
-		FiFo->Tail = FiFo->pBuf;
+    _DI();
+    FiFo->pBuf = Buf;
+    FiFo->Head = FiFo->pBuf;
+    FiFo->Tail = FiFo->pBuf;
     FiFo->len = Size;
-	_EI();
+    _EI();
 }
 
 /* ************ ****** ************ THE FILE END  ************ ****** ************ */				

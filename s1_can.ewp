@@ -89,7 +89,7 @@
         </option>
         <option>
           <name>OGChipSelectEditMenu</name>
-          <state>STM32F407ZG	ST STM32F407ZG</state>
+          <state>STM32F407VG	ST STM32F407VG</state>
         </option>
         <option>
           <name>GenLowLevelInterface</name>
@@ -149,7 +149,7 @@
         </option>
         <option>
           <name>GFPUDeviceSlave</name>
-          <state>STM32F407ZG	ST STM32F407ZG</state>
+          <state>STM32F407VG	ST STM32F407VG</state>
         </option>
         <option>
           <name>FPU2</name>
@@ -316,6 +316,9 @@
           <state>$PROJ_DIR$\user</state>
           <state>$PROJ_DIR$\module\systick</state>
           <state>$PROJ_DIR$\user\inc</state>
+          <state>$PROJ_DIR$\module\Debug_Printf</state>
+          <state>$PROJ_DIR$\module\lis3dsh</state>
+          <state>$PROJ_DIR$\module\cs43l22</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -1940,10 +1943,16 @@
       <name>$PROJ_DIR$\Libraries\STM32F4xx_StdPeriph_Driver\src\misc.c</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.c</name>
@@ -1955,6 +1964,24 @@
   <group>
     <name>module</name>
     <group>
+      <name>cs43l22</name>
+      <file>
+        <name>$PROJ_DIR$\module\cs43l22\cs43l22.c</name>
+      </file>
+    </group>
+    <group>
+      <name>Debug_printf</name>
+      <file>
+        <name>$PROJ_DIR$\module\Debug_Printf\uart_printf.c</name>
+      </file>
+    </group>
+    <group>
+      <name>lis3dsh</name>
+      <file>
+        <name>$PROJ_DIR$\module\lis3dsh\lis3dsh.c</name>
+      </file>
+    </group>
+    <group>
       <name>systick</name>
       <file>
         <name>$PROJ_DIR$\module\systick\systick.c</name>
@@ -1964,7 +1991,25 @@
   <group>
     <name>User</name>
     <file>
+      <name>$PROJ_DIR$\user\src\can.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\user\src\fifo.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\user\src\i2c.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\user\src\key.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\user\main.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\user\src\spi.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\user\src\sys.c</name>
@@ -1974,6 +2019,9 @@
     </file>
     <file>
       <name>$PROJ_DIR$\user\src\timer.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\user\src\uart.c</name>
     </file>
   </group>
 </project>

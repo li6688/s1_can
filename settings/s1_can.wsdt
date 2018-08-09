@@ -18,13 +18,13 @@
           
           
           
-        <Column0>197</Column0><Column1>27</Column1><Column2>27</Column2><Column3>27</Column3></ColumnWidths>
+        <Column0>198</Column0><Column1>27</Column1><Column2>27</Column2><Column3>27</Column3></ColumnWidths>
       </Workspace>
-    </Static>
+    <Debug-Log><ColumnWidth0>22</ColumnWidth0><ColumnWidth1>1305</ColumnWidth1></Debug-Log><TerminalIO/></Static>
     <Windows>
       
       
-    <Wnd0>
+    <Wnd2>
         <Tabs>
           <Tab>
             <Identity>TabID-11429-4277</Identity>
@@ -32,9 +32,9 @@
             <Factory>Build</Factory>
             <Session/>
           </Tab>
-        </Tabs>
+        <Tab><Identity>TabID-14225-20401</Identity><TabName>Debug Log</TabName><Factory>Debug-Log</Factory><Session/></Tab></Tabs>
         
-      <SelectedTab>0</SelectedTab></Wnd0><Wnd1>
+      <SelectedTab>0</SelectedTab></Wnd2><Wnd3>
         <Tabs>
           <Tab>
             <Identity>TabID-22178-4280</Identity>
@@ -42,24 +42,24 @@
             <Factory>Workspace</Factory>
             <Session>
               
-            <NodeDict><ExpandedNode>s1_can</ExpandedNode><ExpandedNode>s1_can/CMSIS</ExpandedNode><ExpandedNode>s1_can/User</ExpandedNode><ExpandedNode>s1_can/lib</ExpandedNode><ExpandedNode>s1_can/module</ExpandedNode><ExpandedNode>s1_can/module/systick</ExpandedNode></NodeDict></Session>
+            <NodeDict><ExpandedNode>s1_can</ExpandedNode><ExpandedNode>s1_can/CMSIS</ExpandedNode><ExpandedNode>s1_can/User</ExpandedNode><ExpandedNode>s1_can/lib</ExpandedNode><ExpandedNode>s1_can/module</ExpandedNode><ExpandedNode>s1_can/module/cs43l22</ExpandedNode></NodeDict></Session>
           </Tab>
         </Tabs>
         
-      <SelectedTab>0</SelectedTab></Wnd1></Windows>
+      <SelectedTab>0</SelectedTab></Wnd3></Windows>
     <Editor>
       
       
       
       
-    <Pane/><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
+    <Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\user\main.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>43</YPos2><SelStart2>1422</SelStart2><SelEnd2>1422</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\user\src\i2c.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>267</YPos2><SelStart2>8908</SelStart2><SelEnd2>8908</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\module\cs43l22\cs43l22.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>57</YPos2><SelStart2>0</SelStart2><SelEnd2>0</SelEnd2></Tab><ActiveTab>2</ActiveTab></Pane><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
     <Positions>
       
       
       
       
       
-    <Top><Row0><Sizes><Toolbar-0517E388><key>iaridepm.enu1</key></Toolbar-0517E388></Sizes></Row0></Top><Left><Row0><Sizes><Wnd1><Rect><Top>-2</Top><Left>-2</Left><Bottom>698</Bottom><Right>271</Right><x>-2</x><y>-2</y><xscreen>200</xscreen><yscreen>200</yscreen><sizeHorzCX>156250</sizeHorzCX><sizeHorzCY>212540</sizeHorzCY><sizeVertCX>213281</sizeVertCX><sizeVertCY>743889</sizeVertCY></Rect></Wnd1></Sizes></Row0></Left><Right><Row0><Sizes/></Row0></Right><Bottom><Row0><Sizes><Wnd0><Rect><Top>-2</Top><Left>-2</Left><Bottom>198</Bottom><Right>1282</Right><x>-2</x><y>-2</y><xscreen>1284</xscreen><yscreen>200</yscreen><sizeHorzCX>1003125</sizeHorzCX><sizeHorzCY>212540</sizeHorzCY><sizeVertCX>156250</sizeVertCX><sizeVertCY>212540</sizeVertCY></Rect></Wnd0></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
+    <Top><Row0><Sizes><Toolbar-0106C8B0><key>iaridepm.enu1</key></Toolbar-0106C8B0></Sizes></Row0></Top><Left><Row0><Sizes><Wnd3><Rect><Top>-2</Top><Left>-2</Left><Bottom>497</Bottom><Right>289</Right><x>-2</x><y>-2</y><xscreen>213</xscreen><yscreen>146</yscreen><sizeHorzCX>155930</sizeHorzCX><sizeHorzCY>212828</sizeHorzCY><sizeVertCX>213031</sizeVertCX><sizeVertCY>727405</sizeVertCY></Rect></Wnd3></Sizes></Row0></Left><Right><Row0><Sizes/></Row0></Right><Bottom><Row0><Sizes><Wnd2><Rect><Top>-2</Top><Left>-2</Left><Bottom>144</Bottom><Right>1368</Right><x>-2</x><y>-2</y><xscreen>1370</xscreen><yscreen>146</yscreen><sizeHorzCX>1002928</sizeHorzCX><sizeHorzCY>212828</sizeHorzCY><sizeVertCX>155930</sizeVertCX><sizeVertCY>212828</sizeVertCY></Rect></Wnd2></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
   </Desktop>
 </Workspace>
 

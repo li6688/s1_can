@@ -41,6 +41,10 @@ typedef struct
 {
 	bool flag;
 	bool key_scan;//按键扫描
+	bool key_has;//有按键
+	bool can_send;
+    bool can1_send;
+    bool can2_sce;
 	Status_StructType Start;
   
 }Flag_StructType;
@@ -49,7 +53,8 @@ typedef struct
 typedef struct
 {
     uint32_t  ResetSource;//复位源
-	uint8_t  DeviceID;//设备地址
+	uint8_t  Dir;
+    uint8_t  preDir;
 	uint16_t GrayCode;//格雷码
 	uint8_t  FMVersion[30];
 	uint16_t PortConnectTime;//端口连接计时
